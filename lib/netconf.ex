@@ -49,7 +49,7 @@ defmodule Netconf do
   end
 
   def get_message(channel, :eom, message \\ "") do
-    case SSHKit.SSH.Channel.recv(channel, 2000) do
+    case SSHKit.SSH.Channel.recv(channel, 3000) do
       {:ok, {:data, _channel, 0, next_line}} ->
         if String.contains?(next_line, "]]>]]>") do
           "#{message}#{next_line}"
